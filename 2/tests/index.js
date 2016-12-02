@@ -3,7 +3,7 @@ var test = require('tape');
 var keypad = require('../keypad');
 var keypad2 = require('../keypad2');
 
-test('Moving Up', (t) => {
+test('Moving Up from starting position', (t) => {
     t.plan(1);
 
     keypad.reset();
@@ -12,7 +12,7 @@ test('Moving Up', (t) => {
     t.equal(keypad.getCurrentButton(), '2');
 });
 
-test('Moving Left', (t) => {
+test('Moving Left from starting position', (t) => {
     t.plan(1);
 
     keypad.reset();
@@ -21,7 +21,7 @@ test('Moving Left', (t) => {
     t.equal(keypad.getCurrentButton(), '4');
 });
 
-test('Moving Right', (t) => {
+test('Moving Right from starting position', (t) => {
     t.plan(1);
 
     keypad.reset();
@@ -30,7 +30,7 @@ test('Moving Right', (t) => {
     t.equal(keypad.getCurrentButton(), '6');
 });
 
-test('Moving Down', (t) => {
+test('Moving Down from starting position', (t) => {
     t.plan(1);
 
     keypad.reset();
@@ -58,7 +58,7 @@ test('Second line of demo instructions', (t) => {
     t.equal(keypad.getCurrentButton(), '9');
 });
 
-test('Getting code from instruction set', (t) => {
+test('Getting code from demo instructions', (t) => {
     t.plan(1);
 
     keypad.reset();
@@ -109,7 +109,7 @@ test('Second keypad moving Down from starting position', (t) => {
     t.equal(keypad2.getCurrentButton(), '5');
 });
 
-test('First line of demo instructions for keypad 2', (t) => {
+test('Second keypad first line of demo instructions', (t) => {
     t.plan(1);
 
     keypad2.reset();
@@ -118,7 +118,7 @@ test('First line of demo instructions for keypad 2', (t) => {
     t.equal(keypad2.getCurrentButton(), '5');
 });
 
-test('Second line of demo instructions keypad 2', (t) => {
+test('Second keypad second line of demo instructions', (t) => {
     t.plan(1);
 
     keypad2.reset();
@@ -126,4 +126,19 @@ test('Second line of demo instructions keypad 2', (t) => {
     keypad2.runSequence('RRDDD');
 
     t.equal(keypad2.getCurrentButton(), 'D');
+});
+
+test('Second keypad getting code from demo instructions', (t) => {
+    t.plan(1);
+
+    keypad2.reset();
+
+    let code = keypad2.getCodeForInstructions([
+        'ULL',
+        'RRDDD',
+        'LURDL',
+        'UUUUD',
+    ]);
+
+    t.equal(code, '5DB3');
 });
