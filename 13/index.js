@@ -25,7 +25,7 @@ while (queue.length > 0) {
 
   // Uncomment out when running Part 1
   if (current.x === target.x && current.y === target.y) {
-    console.log('Target reached!', current)
+    console.log('Part 1: Target reached!', current)
     break
   }
 
@@ -62,18 +62,16 @@ while (queue.length > 0) {
 drawMap()
 
 // Uncomment for Part 2
-console.log(nodes.flat().filter(n => n.steps <= 50).length)
+console.log('Part 2: Nodes able to be reached within 50 steps:', nodes.flat().filter(n => n.steps <= 50).length)
 
 function drawMap() {
   let out = ''
   for (let y = 0; y < map.length; y++) {
     out += '#'
     for (let x = 0; x < map[y].length; x++) {
-      out += map[y][x] !== undefined
-        ? map[y][x]
-          ? '.'
-          : '#'
-        : '?'
+      if (x == start.x && y == start.y) out += 'S'
+      else if (x == target.x && y == target.y) out += 'G'
+      else out += map[y][x] !== undefined ? map[y][x] ? '.' : '#' : ' '
     }
     out += "\n"
   }
