@@ -19,11 +19,9 @@ const queue = [start]
 
 const directionsToCheck = [[0,1],[0,-1],[1,0],[-1,0]]
 
-let steps = 0
 while (queue.length > 0) {
   const current = queue.shift()
 
-  // Uncomment out when running Part 1
   if (current.x === target.x && current.y === target.y) {
     console.log('Part 1: Target reached!', current)
     break
@@ -48,20 +46,12 @@ while (queue.length > 0) {
       nodes[newY][newX] = createNode(newX, newY, newSteps)
 
       queue.push(nodes[newY][newX])
-    } else {
-      const node = nodes[newY][newX]
-      if (node.steps > newSteps) {
-        node.steps = newSteps
-      }
     }
   }
-
-  steps++
 }
 
 drawMap()
 
-// Uncomment for Part 2
 console.log('Part 2: Nodes able to be reached within 50 steps:', nodes.flat().filter(n => n.steps <= 50).length)
 
 function drawMap() {
